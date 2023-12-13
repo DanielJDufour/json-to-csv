@@ -8,7 +8,7 @@ npm install @danieljdufour/json-to-csv
 
 ## usage
 ```js
-import { convert } from "sendero-csv";
+import { convert } from "@danieljdufour/json-to-csv";
 
 data = {
   "agency": "GSA",
