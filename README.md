@@ -5,10 +5,6 @@
 ```js
 npm install @danieljdufour/json-to-csv
 ```
-or
-```html
-<script src="https://unpkg.com/@danieljdufour/json-to-csv"></script>
-```
 
 ## usage
 ```js
