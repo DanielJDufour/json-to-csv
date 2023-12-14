@@ -24,7 +24,7 @@ function convert(
     unique = true
   }
 ) {
-  const items = get(data, start);
+  const items = [".", "", undefined, null].includes(start) ? data : get(data, start);
   if (debug) console.log("[@danieljdufour/json-to-csv] items:", items);
 
   if (!columns) {
