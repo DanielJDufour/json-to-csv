@@ -1,6 +1,6 @@
 {
   "name": "@danieljdufour/json-to-csv",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Convert Array of Nested JSON Data to CSV",
   "main": "./index.js",
   "files": [
