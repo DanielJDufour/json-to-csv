@@ -41,6 +41,7 @@ const csv = convert(data, {
   ],
   limit: 5,
   offset: 10,
+  skipEmptyColumns: true, // only write each column if it actually contains values. default is false
   start: "releases"
 });
 

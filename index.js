@@ -15,6 +15,7 @@ function convert(
     newline,
     offset = 0,
     sep,
+    skipEmptyColumns = false,
     skipEmptyLines,
     sort: _sort = true,
     start,
@@ -60,6 +61,33 @@ function convert(
     quoteChar
   };
   if (debug) console.log("[@danieljdufour/json-to-csv] config:", config);
+
+  if (skipEmptyColumns) {
+    // start out assuming all columns are empty before reading first row
+    let emptyColumns = config.columns;
+
+    for (let r = 0; r < rows.length; r++) {
+      const row = rows[r];
+
+      // only keep if continue not to find valid values
+      emptyColumns = emptyColumns.filter(function (col) {
+        return [null, undefined, "", "null", "undefined"].includes(row[col]);
+      });
+    }
+
+    if (debug) console.log("[@danieljdufour/json-to-csv] emptyColumns:", emptyColumns);
+
+    if (emptyColumns.length >= 1) {
+      for (let r = 0; r < rows.length; r++) {
+        const row = rows[r];
+        for (let i = 0; i < emptyColumns.length; i++) {
+          const col = emptyColumns[i];
+          delete row[col];
+        }
+      }
+      config.columns = config.columns.filter(col => emptyColumns.indexOf(col) === -1);
+    }
+  }
 
   const result = unparse(rows, config);
 

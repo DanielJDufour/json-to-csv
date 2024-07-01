@@ -34,3 +34,16 @@ test("default", ({ eq }) => {
   );
   fs.writeFileSync("./test-output/default.csv", csv);
 });
+
+test("skipEmptyColumns", ({ eq }) => {
+  const csv = convert(data, {
+    columns: [
+      { name: "name", path: "name" },
+      { name: "empty", path: "unknown.path" }
+    ],
+    limit: 5,
+    skipEmptyColumns: true,
+    start: "releases"
+  });
+  eq(csv, "name\r\nusasearch\r\ncron_scripts\r\nmobile-fu\r\nrails-google-visualization-plugin\r\napache-log-parser");
+});
